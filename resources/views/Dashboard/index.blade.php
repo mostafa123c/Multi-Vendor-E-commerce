@@ -66,6 +66,5 @@
         </div>
         <!-- /.col-md-6 -->
     </div>
-///
 @endsection
 
