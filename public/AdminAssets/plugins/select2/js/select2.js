@@ -797,7 +797,7 @@ S2.define('select2/utils',[
   };
 
   Utils.StoreData = function (element, name, value) {
-    // Stores an item in the cache for a specified element.
+    // Store an item in the cache for a specified element.
     // name is the cache key.
     var id = Utils.GetUniqueElementId(element);
     if (!Utils.__cache[id]) {

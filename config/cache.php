@@ -19,7 +19,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Cache Stores
+    | Cache Store
     |--------------------------------------------------------------------------
     |
     | Here you may define all of the cache "stores" for your application as

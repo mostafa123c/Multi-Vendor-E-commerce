@@ -12,7 +12,7 @@
 "use strict";
 
 CodeMirror.defineMode("puppet", function () {
-  // Stores the words from the define method
+  // Store the words from the define method
   var words = {};
   // Taken, mostly, from the Puppet official variable standards regex
   var variable_regex = /({)?([a-z][a-z0-9_]*)?((::[a-z][a-z0-9_]*)*::)?[a-zA-Z0-9_]+(})?/;
