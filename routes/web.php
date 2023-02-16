@@ -19,10 +19,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/dash', function () {
+    return view('dashboard');})
+    ->middleware(['auth', 'verified']);
+
 
 Route::get('/dashboard',[Dashboardcontroller::class , 'index'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth'])      //middleware(['auth', 'verified'])  untill verifying
     ->name('dashboard');
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
