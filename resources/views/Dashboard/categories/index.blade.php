@@ -10,11 +10,17 @@
 @section('content')
 
     <div class="mb-5">
-        <a href="{{route('categories.create')}}" class="btn btn-sm btn-outline-primary">Create</a>
+        <a href="{{route('dashboard.categories.create')}}" class="btn btn-sm btn-outline-primary">Create</a>
     </div>
     @if(session()->has('success'))
         <div class="alert alert-success">
             {{session('success')}}
+        </div>
+    @endif
+
+    @if(session()->has('info'))
+        <div class="alert alert-info">
+            {{session('info')}}
         </div>
     @endif
     <table class="table">
@@ -37,10 +43,10 @@
                 <td>{{$category->parent_id}}</td>
                 <td>{{$category->created_at}}</td>
                 <td>
-                    <a href="{{ route('categories.edit' , $category->id) }}" class="btn btn-sm btn-outline-success">Edit</a>
+                    <a href="{{ route('dashboard.categories.edit' , $category->id) }}" class="btn btn-sm btn-outline-success">Edit</a>
                 </td>
                 <td>
-                    <form method="post" action="{{ route('categories.destroy',$category->id) }}">
+                    <form method="post" action="{{ route('dashboard.categories.destroy',$category->id) }}">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
@@ -49,7 +50,7 @@ class CategoriesController extends Controller
         $category = Category::create( $request->all());
 
         //prg (post redirect get)
-        return Redirect()->route('categories.index')
+        return Redirect()->route('dashboard.categories.index')
             ->with('success', 'Category created!');
     }
 
@@ -61,7 +62,7 @@ class CategoriesController extends Controller
      */
     public function show($id)
     {
-        //
+      //
     }
 
     /**
@@ -72,7 +73,23 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        //
+        try {
+            $category = Category::findOrfail($id);
+        } catch (Exception $e) {
+            return redirect()->route('dashboard.categories.index')
+                ->with('info', 'Record not found!');
+        };
+
+        // SELECT * FROM categories WHERE id <> $id
+        // AND (parent_id IS NULL OR parent_id <> $id)
+        $parents = Category::where('id', '<>', $id)
+            ->where(function($query) use ($id) {
+                $query->whereNull('parent_id')
+                    ->orWhere('parent_id', '<>', $id);
+            })
+            ->get();
+
+        return view('dashboard.categories.edit' , compact('category' , 'parents'));
     }
 
     /**
@@ -84,7 +101,13 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category = Category::find($id);
+
+        $category->update($request->all());
+
+        //prg (post redirect get)
+        return Redirect()->route('dashboard.categories.index')
+            ->with('success', 'Category Updated!');
     }
 
     /**
@@ -95,6 +118,12 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //$category = Category::findOrFail($id);
+        //$category->delete();
+        //Category::where('id', '=', $id)->delete();
+        Category::destroy($id);
+
+        return Redirect::route('dashboard.categories.index')
+            ->with('success', 'Category deleted!');
     }
 }

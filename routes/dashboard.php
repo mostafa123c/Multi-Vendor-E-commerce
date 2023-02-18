@@ -1,15 +1,22 @@
 <?php
 
-use App\Http\Controllers\Admin\Dashboardcontroller;
 use App\Http\Controllers\Dashboard\CategoriesController;
+use App\Http\Controllers\Dashboard\Dashboardcontroller;
 use Illuminate\Support\Facades\Route;
 
 
+Route::group([
+   'middleware' => 'auth',
+    'as'=>'dashboard.',
+    'prefix' => 'dashboard',
+    //'namespace' => 'App\Http\Controllers\Dashboard',
 
-Route::get('/dashboard',[Dashboardcontroller::class , 'index'])
-    ->middleware(['auth'])      //middleware(['auth', 'verified'])  untill verifying
-    ->name('dashboard');
+], function (){
 
+    Route::get('/',[Dashboardcontroller::class , 'index'])->name('dashboard');
 
-Route::resource('dashboard/categories' , CategoriesController::class);
+    Route::resource('/categories' , CategoriesController::class);
+
+});
+
 
