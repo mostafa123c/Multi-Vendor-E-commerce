@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Exception;
 use Illuminate\Http\Request;
@@ -43,6 +44,7 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
+        $clean_data = $request->validate(Category::rules());
         //request merge (i can add value to the request)
         $request->merge([
             'slug' => Str::slug($request->post('name'))
@@ -104,19 +106,23 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
+        //$request->validate(Category::rules($id));
         $category = Category::findOrfail($id);
 
         $old_image = $category->image;
 
         $data = $request->except('image');
-        $data['image'] = $this->uploadimage($request);
+        $new_image = $this->uploadimage($request);
+        if($new_image) {
+            $data['image'] = $new_image;
+        };
 
         $category->update($data);
 
 
-        if ($old_image && $data['image']) {
+        if ($old_image && $new_image) {
             Storage::disk('public')->delete($old_image);
         };
 
