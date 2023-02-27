@@ -45,7 +45,7 @@
             </ul>
         </nav>
         <div>
-{{--            {{$paginator->firstItem() }} - {{$paginator->lastItem() }} of {{$paginator->total() }}--}}
+            {{$paginator->firstItem() }} - {{$paginator->lastItem() }} of {{$paginator->total() }}
         </div>
     </div>
 @endif
