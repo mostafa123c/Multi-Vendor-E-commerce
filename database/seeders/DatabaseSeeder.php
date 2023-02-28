@@ -17,16 +17,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+//         \App\Models\User::factory(2)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
 
-        Store::factory(5)->create();
+        //Store::factory(5)->create();
         Category::factory(10)->create();
-        Product::factory(100)->create();
+        Product::factory(10)->create();
 
     }
 }
