@@ -18,7 +18,7 @@ return [
 
     [
         'icon' => 'fas fa-box nav-icon',
-        'route' => 'dashboard.categories.index',
+        'route' => 'dashboard.products.index',
         'title' => 'Products',
         'active' => 'dashboard.products.*',
         'ability' => 'products.view',
