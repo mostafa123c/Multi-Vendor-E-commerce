@@ -71,6 +71,8 @@ return [
 
     'timezone' => 'UTC',
 
+    'currency' => 'USD',
+
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration
@@ -210,6 +212,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         'auth' => \Illuminate\Support\Facades\Auth::class,
+        'Currency' => App\Helpers\Currency::class,
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
