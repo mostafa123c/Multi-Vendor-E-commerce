@@ -10,10 +10,8 @@
 @section('content')
 
     <div class="mb-5">
-        @if(Auth::user()->can('categories.create'))
             <a href="{{ route('dashboard.categories.create') }}" class="btn btn-sm btn-outline-primary mr-2">Create</a>
-        @endif
-        <a href="{{ route('dashboard.categories.trash') }}" class="btn btn-sm btn-outline-dark">Trash</a>
+            <a href="{{ route('dashboard.categories.trash') }}" class="btn btn-sm btn-outline-dark">Trash</a>
     </div>
 
     <x-alert type="success" />
